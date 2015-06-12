@@ -36,3 +36,25 @@ LoadTemplate.prototype.create = function(callback){
     // Send request.
     req.send();
 };
+
+LoadTemplate.prototype.createAndWait = function(callback){
+    var req = new XMLHttpRequest();
+    var that = this;
+
+    // Define parameters for request.
+    req.open('get', this.folderPath + this.tempName + '.handlebars', true);
+
+    // Wait for request to complete.
+    req.onreadystatechange = function(){
+        if (req.readyState == 4 && req.status == 200){
+            //Compile HB template, but wait..
+            var compiled = Handlebars.compile(req.response);
+
+            // Execute callback function and parse variables.
+            callback(compiled, that.el);
+        }
+    };
+
+    // Send request.
+    req.send();
+};
