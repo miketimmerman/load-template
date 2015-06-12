@@ -21,4 +21,6 @@ Now you can call the create method. You can provide a callback, this will be exe
 
     tpl.create(function(){ ... });
     
+..Or you can use the createAndWait method. This method is simular to the one above, but the template and element will be send back to the callback so you can determine when the template is placed on the page. This method can be usefull when you want to retrieve some data from an API and use this in the template.
 
+    tpl.createAndWait(function(template, element){ ... });
